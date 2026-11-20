@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guidebook SumoBot Autonomous - INFOFEST 2026</title>
+  <meta name="description"
+    content="Petunjuk Teknis dan Pedoman Resmi Lomba SumoBot Autonomous INFOFEST 2026 - Fakultas Teknik Universitas Hamzanwadi.">
+  <link rel="icon" type="image/png" href="assets/logo-infofest.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              800: '#0c4a6e',
+              900: '#082f49',
+              accent: '#38bdf8',
+              gold: '#f59e0b',
+              amber: '#d97706',
+            },
+            surface: {
+              dark: '#090d16',
+              card: '#0f172a',
+              cardLight: '#1e293b',
+              border: '#1e293b',
+              light: '#f8fafc',
+              lightCard: '#ffffff',
+              lightBorder: '#e2e8f0',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body
+  class="bg-surface-light text-slate-800 dark:bg-surface-dark dark:text-slate-100 antialiased selection:bg-brand-500 selection:text-white transition-colors duration-300">
+
+  <!-- Progress Bar Top -->
+  <div id="scroll-progress"
+    class="fixed top-0 left-0 h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 z-50 transition-all duration-150 w-0">
+  </div>
+
+  <!-- Top Announcement / Event Banner -->
+  <header
+    class="border-b border-slate-200 dark:border-slate-800/80 bg-white/85 dark:bg-[#0b1120]/85 backdrop-blur-md sticky top-0 z-40 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-4">
+
+      <!-- Brand & Event Identity -->
+      <a href="#hero"
+        class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none focus:ring-2 focus:ring-brand-400 rounded-lg p-1 min-w-0">
+        <!-- Main Infofest Logo Badge -->
+        <div
+          class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 p-1.5 flex items-center justify-center shadow-md shadow-cyan-500/10 group-hover:scale-105 transition-transform shrink-0">
+          <img src="assets/logo-infofest.png" alt="Logo Infofest 2026" class="w-full h-full object-contain">
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <span
+              class="font-display font-bold text-base sm:text-lg tracking-wider text-slate-900 dark:text-white group-hover:text-cyan-500 transition-colors">INFOFEST
+              <span class="text-cyan-500">2026</span></span>
+          </div>
+          <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 truncate">Fakultas Teknik Universitas
+            Hamzanwadi</p>
+        </div>
+      </a>
+
+      <!-- Quick Search Bar (Header) -->
+      <div class="relative flex-1 max-w-md hidden md:block">
+        <div class="relative">
+          <input type="text" id="global-search"
+            placeholder="Cari juknis (misal: dimensi, remote, babak grup, sanksi)..."
+            class="w-full bg-slate-100 dark:bg-slate-900/90 text-sm rounded-xl pl-10 pr-10 py-2 border border-slate-300 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 transition-all">
+          <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <button id="clear-search"
+            class="hidden absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Controls: Quick Actions & Theme Toggle -->
+      <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+        <!-- Print / PDF Button -->
+        <button onclick="window.print()" title="Cetak atau Simpan PDF"
+          class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+          <span class="hidden sm:inline">Cetak / PDF</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" title="Ganti Tema Gelap/Terang"
+          class="p-2 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <svg id="theme-icon-dark" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg id="theme-icon-light" class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <!-- Mobile TOC Toggle Button -->
+        <button id="mobile-toc-btn"
+          class="lg:hidden inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20 hover:bg-cyan-500/20 text-xs font-semibold">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+          </svg>
+          <span>Daftar Isi</span>
+        </button>
+
+        <!-- Official Register CTA -->
+        <a href="https://forms.gle/U7KSpKvCLFzufi999" target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-md shadow-cyan-500/20 transition-all hover:scale-[1.02]">
+          <span class="sm:hidden">Daftar</span>
+          <span class="hidden sm:inline">Daftar Sekarang</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile Search Row -->
+    <div class="px-3 py-2 border-t border-slate-200 dark:border-slate-800 md:hidden bg-slate-50 dark:bg-slate-900/50">
+      <div class="relative">
+        <input type="text" id="global-search-mobile" placeholder="Cari kata kunci juknis..."
+          class="w-full bg-white dark:bg-slate-900 text-sm rounded-lg pl-9 pr-3 py-1.5 border border-slate-300 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-slate-800 dark:text-slate-200">
+        <svg class="w-4 h-4 text-slate-400 absolute left-2.5 top-2.5" fill="none" stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero"
+    class="relative overflow-hidden pt-6 pb-10 sm:pt-10 sm:pb-14 lg:pt-14 lg:pb-16 border-b border-slate-200 dark:border-slate-800/60 bg-gradient-to-b from-cyan-500/5 via-transparent to-transparent">
+    <!-- Subtle Background Glows -->
+    <div
+      class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none">
+    </div>
+    <div class="absolute top-1/2 right-10 w-72 h-72 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="text-center max-w-3xl mx-auto">
+
+        <!-- Official Partner & Event Logo Bar (Mobile & Desktop Optimized) -->
+        <div class="mb-5 sm:mb-6 flex justify-center">
+          <div
+            class="inline-flex items-center justify-center gap-3 sm:gap-5 px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl bg-white/95 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 shadow-lg shadow-cyan-500/5 backdrop-blur-md max-w-full">
+
+            <!-- 1. Logo Fakultas Teknik Universitas Hamzanwadi -->
+            <div class="flex flex-col items-center gap-1 group">
+              <div
+                class="w-11 h-11 sm:w-14 sm:h-14 rounded-xl bg-slate-50 dark:bg-slate-800/70 p-1.5 flex items-center justify-center border border-slate-200/60 dark:border-slate-700/60 transition-transform group-hover:scale-105">
+                <img src="assets/logo-ft-unhaz-clean.png" alt="Logo Fakultas Teknik Universitas Hamzanwadi"
+                  class="w-full h-full object-contain">
+              </div>
+              <span class="text-[9px] sm:text-[10px] font-semibold text-slate-500 dark:text-slate-400 tracking-tight">FT
+                UNHAZ</span>
+            </div>
+
+            <div class="h-9 sm:h-11 w-px bg-slate-200 dark:bg-slate-800 shrink-0"></div>
+
+            <!-- 2. Logo Utama INFOFEST 2026 (Featured Centerpiece) -->
+            <div class="flex flex-col items-center gap-1 group">
+              <div
+                class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-b from-cyan-500/10 to-blue-500/5 dark:from-white/10 dark:to-white/5 p-1.5 sm:p-2 flex items-center justify-center border border-cyan-500/30 shadow-md shadow-cyan-500/10 transition-transform group-hover:scale-105">
+                <img src="assets/logo-infofest.png" alt="Logo Resmi Infofest 2026"
+                  class="w-full h-full object-contain drop-shadow-sm">
+              </div>
+              <span
+                class="text-[10px] sm:text-[11px] font-bold text-cyan-600 dark:text-cyan-400 tracking-wide">INFOFEST</span>
+            </div>
+
+            <div class="h-9 sm:h-11 w-px bg-slate-200 dark:bg-slate-800 shrink-0"></div>
+
+            <!-- 3. Logo ORION -->
+            <div class="flex flex-col items-center gap-1 group">
+              <div
+                class="w-11 h-11 sm:w-14 sm:h-14 rounded-xl bg-slate-50 dark:bg-slate-800/70 p-1.5 flex items-center justify-center border border-slate-200/60 dark:border-slate-700/60 transition-transform group-hover:scale-105">
+                <img src="assets/logo-orion-clean.png" alt="Logo Orion"
+                  class="w-full h-full object-contain dark:invert">
+              </div>
+              <span
+                class="text-[9px] sm:text-[10px] font-semibold text-slate-500 dark:text-slate-400 tracking-tight">ORION</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Badge -->
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-300 text-[11px] sm:text-xs font-semibold mb-4 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+          <span>BUKU PANDUAN RESMI (GUIDEBOOK)</span>
+        </div>
+
+        <h1
+          class="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+          SumoBot <span
+            class="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent">Autonomous</span>
+          <br>
+          <span class="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-700 dark:text-slate-300">INFOFEST
+            2026</span>
+        </h1>
+
+        <p class="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+          Pedoman teknis, regulasi dimensi, sistem turnamen, dan aturan pertandingan resmi kompetisi robot sumo
+          autonomous berskala nasional.
+        </p>
+
+        <!-- Theme Quote Tag -->
+        <div
+          class="mt-4 inline-block text-xs font-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/40 px-3 py-1 rounded-md">
+          Tema: &ldquo;Creative Minds, Innovative Future&rdquo;
+        </div>
+
+        <!-- Highlight Stats Grid -->
+        <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3 text-left">
+
+          <div
+            class="p-3 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-cyan-500/40 transition-colors">
+            <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400 block">Dimensi Start</span>
+            <span class="text-sm font-bold text-slate-900 dark:text-white font-display">10 × 10 cm</span>
+            <span class="text-[10px] text-slate-400 block mt-0.5">Tinggi Bebas</span>
+          </div>
+
+          <div
+            class="p-3 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-cyan-500/40 transition-colors">
+            <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400 block">Bobot Maksimal</span>
+            <span class="text-sm font-bold text-cyan-500 font-display">500 Gram</span>
+            <span class="text-[10px] text-slate-400 block mt-0.5">Termasuk baterai</span>
+          </div>
+
+          <div
+            class="p-3 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-cyan-500/40 transition-colors">
+            <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400 block">Sistem Robot</span>
+            <span class="text-sm font-bold text-indigo-500 font-display">Autonomous</span>
+            <span class="text-[10px] text-slate-400 block mt-0.5">Tanpa joystick manual</span>
+          </div>
+
+          <div
+            class="p-3 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-cyan-500/40 transition-colors">
+            <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400 block">Arena Dohyo</span>
+            <span class="text-sm font-bold text-slate-900 dark:text-white font-display">Ø 77 cm</span>
+            <span class="text-[10px] text-slate-400 block mt-0.5">HPL Kayu Hitam</span>
+          </div>
+
+          <div
+            class="p-3 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-cyan-500/40 transition-colors">
+            <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400 block">Biaya Registrasi</span>
+            <span class="text-sm font-bold text-amber-500 font-display">Rp 150.000</span>
+            <span class="text-[10px] text-slate-400 block mt-0.5">Per tim (2 orang)</span>
+          </div>
+
+          <div
+            class="p-3 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-cyan-500/40 transition-colors">
+            <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400 block">Kuota Maksimal</span>
+            <span class="text-sm font-bold text-emerald-500 font-display">48 Tim</span>
+            <span class="text-[10px] text-slate-400 block mt-0.5">Fastest registration</span>
+          </div>
+
+        </div>
+
+        <!-- Quick Jump Shortcut Bar -->
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-2">
+          <a href="#spesifikasi-robot"
+            class="text-xs px-3 py-1.5 rounded-lg bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors flex items-center gap-1">
+            <span>⚙️ Spesifikasi Robot</span>
+          </a>
+          <a href="#arena-pertandingan"
+            class="text-xs px-3 py-1.5 rounded-lg bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors flex items-center gap-1">
+            <span>⭕ Visualisasi Arena</span>
+          </a>
+          <a href="#sistem-perlombaan"
+            class="text-xs px-3 py-1.5 rounded-lg bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors flex items-center gap-1">
+            <span>⚔️ Sistem Pertandingan</span>
+          </a>
+          <a href="#timeline"
+            class="text-xs px-3 py-1.5 rounded-lg bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors flex items-center gap-1">
+            <span>📅 Jadwal & Timeline</span>
+          </a>
+          <a href="#contact"
+            class="text-xs px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors flex items-center gap-1">
+            <span>💬 Hubungi CP (Jea / Rizka)</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Container: Layout with Sticky Sidebar (Daftar Isi) & Main Document Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+      <!-- DESKTOP SIDEBAR: Sticky Interactive Table of Contents -->
+      <aside
+        class="hidden lg:block lg:col-span-3 sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pr-3 custom-scrollbar">
+        <div
+          class="bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 shadow-sm backdrop-blur">
+
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 mb-3">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+              </svg>
+              <h2 class="font-display font-bold text-sm tracking-wide text-slate-900 dark:text-white uppercase">Daftar
+                Isi</h2>
+            </div>
+            <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">15 Bagian</span>
+          </div>
+
+          <!-- Interactive Nav Links with Live Scrollspy -->
+          <nav id="toc-nav" class="space-y-0.5 text-xs">
+            <a href="#tentang-infofest"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+              <span class="truncate">1. Tentang Infofest</span>
+              <span class="text-[10px] text-slate-400 font-mono">03</span>
+            </a>
+            <a href="#deskripsi-umum"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+              <span class="truncate">2. Deskripsi Umum</span>
+              <span class="text-[10px] text-slate-400 font-mono">04</span>
+            </a>
+            <a href="#persyaratan-umum"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+              <span class="truncate">3. Persyaratan Umum</span>
+              <span class="text-[10px] text-slate-400 font-mono">05</span>
+            </a>
+            <a href="#ketentuan-umum"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+              <span class="truncate">4. Ketentuan Umum</span>
+              <span class="text-[10px] text-slate-400 font-mono">06</span>
+            </a>
+            <a href="#ketentuan-peserta"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+              <span class="truncate">5. Ketentuan & Syarat Peserta</span>
+              <span class="text-[10px] text-slate-400 font-mono">07</span>
+            </a>
+            <a href="#timeline"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+              <span class="truncate">6. Timeline & Biaya</span>
+              <span class="text-[10px] text-slate-400 font-mono">09</span>
+            </a>
+            <a href="#alur-pendaftaran"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+              <span class="truncate">7. Alur Pendaftaran</span>
+              <span class="text-[10px] text-slate-400 font-mono">10</span>
+            </a>
+            <a href="#spesifikasi-robot"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors font-medium text-cyan-600 dark:text-cyan-400">
+              <span class="truncate">8. Spesifikasi Robot</span>
+              <span class="text-[10px] font-mono">12</span>
+            </a>
+            <a href="#peraturan-perlombaan"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+              <span class="truncate">9. Peraturan Perlombaan</span>
+              <span class="text-[10px] text-slate-400 font-mono">14</span>
+            </a>
+            <a href="#arena-pertandingan"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+              <span class="truncate">10. Arena Pertandingan</span>
+              <span class="text-[10px] text-slate-400 font-mono">17</span>
+            </a>
+            <a href="#sistem-perlombaan"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+              <span class="truncate">11. Sistem Perlombaan</span>
+              <span class="text-[10px] text-slate-400 font-mono">19</span>
+            </a>
+            <a href="#pelanggaran-sanksi"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+              <span class="truncate">12. Pelanggaran & Sanksi</span>
+              <span class="text-[10px] text-slate-400 font-mono">22</span>
+            </a>
+            <a href="#kriteria-penilaian"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+              <span class="truncate">13. Kriteria Penilaian</span>
+              <span class="text-[10px] text-slate-400 font-mono">23</span>
+            </a>
+            <a href="#hadiah"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+              <span class="truncate">14. Hadiah & Apresiasi</span>
+              <span class="text-[10px] text-slate-400 font-mono">24</span>
+            </a>
+            <a href="#contact"
+              class="toc-link flex items-center justify-between py-1.5 px-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors">
+              <span class="truncate">15. Kontak & Penutup</span>
+              <span class="text-[10px] text-slate-400 font-mono">25</span>
+            </a>
+          </nav>
+
+          <!-- Interactive Self-Check Tool Promo in Sidebar -->
+          <div
+            class="mt-5 p-3 rounded-xl bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 text-xs">
+            <div class="flex items-center gap-2 font-semibold text-cyan-600 dark:text-cyan-400 mb-1">
+              <span>⚡ Cek Kelayakan Robot</span>
+            </div>
+            <p class="text-[11px] text-slate-600 dark:text-slate-400 mb-2">Simulasikan uji dimensi & berat sebelum tiba
+              di arena lomba.</p>
+            <a href="#uji-kelayakan-card"
+              class="block text-center py-1.5 px-2 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white font-medium text-[11px] transition-colors">
+              Buka Checklist Uji
+            </a>
+          </div>
+
+          <!-- Need Help Box -->
+          <div class="mt-3 pt-3 border-t border-slate-200 dark:border-slate-800 text-[11px] text-slate-500 space-y-1.5">
+            <p>Ada pertanyaan teknis?</p>
+            <a href="https://wa.me/6287825182361?text=Halo%20Panitia%20Sumobot%20Infofest%202026,%20saya%20ingin%20bertanya"
+              target="_blank" rel="noopener noreferrer"
+              class="flex items-center gap-1.5 text-emerald-500 hover:text-emerald-400 font-semibold">
+              <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+              </svg>
+              <span>WhatsApp Jea (+62 878-2518-2361)</span>
+            </a>
+            <a href="https://wa.me/6287821022615?text=Halo%20Panitia%20Sumobot%20Infofest%202026,%20saya%20ingin%20bertanya"
+              target="_blank" rel="noopener noreferrer"
+              class="flex items-center gap-1.5 text-emerald-500 hover:text-emerald-400 font-semibold">
+              <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+              </svg>
+              <span>WhatsApp Rizka (+62 878-2102-2615)</span>
+            </a>
+          </div>
+
+        </div>
+      </aside>
+
+      <!-- MOBILE OFF-CANVAS TOC (Drawer) -->
+      <div id="mobile-toc-drawer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden transition-opacity">
+        <div
+          class="fixed inset-y-0 right-0 w-80 max-w-[85%] bg-white dark:bg-slate-900 shadow-2xl p-5 overflow-y-auto flex flex-col justify-between">
+          <div>
+            <!-- Mobile Drawer Header with Official Logos -->
+            <div class="flex items-center justify-between pb-3.5 border-b border-slate-200 dark:border-slate-800">
+              <div class="flex items-center gap-2.5">
+                <div
+                  class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 p-1 flex items-center justify-center border border-slate-200 dark:border-slate-700">
+                  <img src="assets/logo-infofest.png" alt="Logo Infofest" class="w-full h-full object-contain">
+                </div>
+                <div>
+                  <h3 class="font-display font-bold text-sm text-slate-900 dark:text-white leading-none">Daftar Isi
+                    Guidebook</h3>
+                  <span class="text-[10px] text-cyan-600 dark:text-cyan-400 font-medium">INFOFEST 2026</span>
+                </div>
+              </div>
+              <button id="close-toc-btn"
+                class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white bg-slate-100 dark:bg-slate-800">✕</button>
+            </div>
+            <nav id="mobile-toc-links" class="mt-3 space-y-1 text-xs sm:text-sm">
+              <!-- Cloned from desktop links via JS -->
+            </nav>
+          </div>
+          <div class="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800">
+            <div class="flex items-center justify-center gap-3 mb-2">
+              <img src="assets/logo-ft-unhaz-clean.png" alt="FT Unhaz" class="w-6 h-6 object-contain">
+              <img src="assets/logo-infofest.png" alt="Infofest" class="w-7 h-7 object-contain">
+              <img src="assets/logo-orion-clean.png" alt="Orion" class="w-6 h-6 object-contain dark:invert">
+            </div>
+            <p class="text-[10px] text-center text-slate-500">INFOFEST 2026 • Fakultas Teknik Universitas Hamzanwadi</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT COLUMN (9 Cols on Large) -->
+      <div class="lg:col-span-9 space-y-10" id="content-container">
+
+        <!-- Search Results Banner (Shown when searching) -->
+        <div id="search-status-bar"
+          class="hidden p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-between text-xs text-cyan-700 dark:text-cyan-300">
+          <span>Menampilkan hasil pencarian untuk: "<strong id="search-term-display"></strong>"</span>
+          <button id="reset-search-btn" class="underline hover:no-underline font-semibold">Tampilkan Semua
+            Dokumen</button>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- 1. TENTANG INFOFEST -->
+        <!-- ========================================== -->
+        <section id="tentang-infofest"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div
+            class="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 01</span>
+            <span>•</span>
+            <span>Profil Penyelenggara</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-4 flex items-center justify-between">
+            <span>Tentang Infofest</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              3</span>
+          </h2>
+
+          <div
+            class="prose dark:prose-invert max-w-none text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed space-y-4">
+            <p>
+              Di era digital yang berkembang pesat, teknologi menjadi bagian penting dalam setiap aspek kehidupan.
+              Mahasiswa informatika dituntut tidak hanya memahami teori dan praktik teknologi, tetapi juga mampu
+              menciptakan inovasi yang bermanfaat bagi masyarakat. Kemampuan berpikir kreatif, kolaboratif, dan adaptif
+              menjadi kunci untuk menghadapi perubahan zaman yang semakin cepat.
+            </p>
+            <p>
+              <strong>Himpunan Mahasiswa Program Studi (HMPS) Informatika</strong> menyadari bahwa penguasaan teknologi
+              perlu diimbangi dengan semangat berkarya dan kemampuan mencipta. Oleh karena itu, dibutuhkan wadah yang
+              mendorong mahasiswa untuk menyalurkan ide, inovasi, serta karya teknologi secara positif dan produktif.
+            </p>
+            <p>
+              Melalui kegiatan <strong>Informatika Festival (INFOFEST)</strong>, HMPS Informatika Fakultas Teknik
+              Universitas Hamzanwadi berupaya menciptakan ruang bagi mahasiswa untuk menunjukkan kreativitas dan
+              kemampuan mereka dalam bidang teknologi, baik melalui kompetisi, seminar, maupun pameran karya digital.
+              Acara ini diharapkan menjadi ajang inspiratif yang mempertemukan ide-ide inovatif, memperkuat solidaritas
+              antar mahasiswa, dan menumbuhkan semangat berkarya dalam bidang informatika.
+            </p>
+
+            <!-- Theme Card -->
+            <div
+              class="p-5 rounded-xl bg-gradient-to-r from-amber-500/5 via-cyan-500/5 to-transparent border-l-4 border-amber-500 bg-slate-50 dark:bg-slate-800/40">
+              <h4 class="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-1">Tema
+                Besar Infofest 2026</h4>
+              <p class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white">
+                &ldquo;Creative Minds, Innovative Future&rdquo;
+              </p>
+              <p class="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                Dengan mengusung tema <strong>&ldquo;Creative Minds, Innovative Future&rdquo;</strong>, Informatika
+                Festival menegaskan komitmen untuk membangun generasi muda yang kreatif, inovatif, dan berkontribusi
+                nyata dalam perkembangan dunia teknologi. Tema ini menjadi dorongan bagi seluruh peserta untuk tidak
+                hanya berpikir tentang teknologi sebagai alat, tetapi juga sebagai sarana mencipta solusi dan karya yang
+                berdampak positif bagi masyarakat luas.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 2. DESKRIPSI UMUM -->
+        <!-- ========================================== -->
+        <section id="deskripsi-umum"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div
+            class="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 02</span>
+            <span>•</span>
+            <span>Cabang Kompetisi</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-4 flex items-center justify-between">
+            <span>Deskripsi Umum SumoBot</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              4</span>
+          </h2>
+
+          <div
+            class="p-4 sm:p-5 rounded-xl bg-cyan-500/5 dark:bg-cyan-500/10 border border-cyan-500/20 text-slate-700 dark:text-slate-200 text-sm sm:text-base leading-relaxed">
+            <p>
+              <strong>SumoBot Infofest 2026</strong> merupakan pertandingan robot dengan tujuan <strong>mengalahkan
+                lawan dengan cara menjatuhkan robot lawan dari arena pertandingan</strong> yang ditentukan sesuai dengan
+              peraturan pertandingan.
+            </p>
+            <div class="mt-3 flex items-center gap-2 text-xs font-semibold text-cyan-600 dark:text-cyan-400">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Robot yang digunakan adalah robot autonomous (bekerja otomatis secara penuh tanpa kendali remote
+                pengarah gerak).</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 3. PERSYARATAN UMUM -->
+        <!-- ========================================== -->
+        <section id="persyaratan-umum"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div
+            class="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 03</span>
+            <span>•</span>
+            <span>Aturan Dasar</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-6 flex items-center justify-between">
+            <span>Persyaratan Umum</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              5</span>
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <!-- Box A -->
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
+              <div class="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white mb-2">
+                <span
+                  class="w-6 h-6 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xs">A</span>
+                <h4>Administrasi & Pendaftaran</h4>
+              </div>
+              <ul class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2 list-disc list-inside">
+                <li>Setiap tim wajib menyelesaikan alur pendaftaran dan melunasi biaya pendaftaran sebelum batas waktu.
+                </li>
+                <li>Daftar ulang wajib dilakukan sebelum pertandingan dimulai dengan menyiapkan kartu identitas berlaku.
+                </li>
+                <li>Peserta yang mundur atau didiskualifikasi <strong>tidak dapat menarik kembali (refund)</strong>
+                  biaya pendaftaran.</li>
+                <li>Informasi resmi hanya melalui Media Sosial <strong>hmpsi.ftuhamzanwadi</strong>.</li>
+              </ul>
+            </div>
+
+            <!-- Box B -->
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
+              <div class="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white mb-2">
+                <span
+                  class="w-6 h-6 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xs">B</span>
+                <h4>Etika & Integritas</h4>
+              </div>
+              <ul class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2 list-disc list-inside">
+                <li>Nama tim dan konten karya dilarang mengandung unsur SARA, pornografi, radikalisme, provokasi, atau
+                  pelanggaran hukum.</li>
+                <li>Peserta wajib menjunjung tinggi sportivitas.</li>
+                <li>Kecurangan, plagiarisme, dan sabotase robot/karya tim lain berakibat <strong>sanksi diskualifikasi
+                    permanen</strong>.</li>
+              </ul>
+            </div>
+
+            <!-- Box C -->
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
+              <div class="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white mb-2">
+                <span
+                  class="w-6 h-6 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xs">C</span>
+                <h4>Teknis & Tanggung Jawab</h4>
+              </div>
+              <ul class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2 list-disc list-inside">
+                <li>Seluruh peralatan, material, serta kebutuhan teknis pendukung sepenuhnya tanggung jawab
+                  masing-masing tim.</li>
+                <li>Panitia tidak bertanggung jawab atas kerusakan atau kehilangan alat peserta sebelum, selama, dan
+                  setelah kompetisi.</li>
+                <li>Wajib mengenakan kartu identitas (ID Card) resmi selama di area kompetisi luring.</li>
+              </ul>
+            </div>
+
+            <!-- Box D -->
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
+              <div class="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white mb-2">
+                <span
+                  class="w-6 h-6 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xs">D</span>
+                <h4>Ketentuan TM & Penjurian</h4>
+              </div>
+              <ul class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2 list-disc list-inside">
+                <li>Perwakilan tim wajib mengikuti Technical Meeting. Tim yang absen dianggap menyetujui seluruh hasil
+                  keputusan TM.</li>
+                <li>Keputusan Dewan Juri bersifat <strong>mutlak, final, dan tidak dapat diganggu gugat</strong>.</li>
+                <li>Hal yang belum diatur akan ditentukan kemudian melalui kebijakan tambahan atau saat TM.</li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 4. KETENTUAN UMUM -->
+        <!-- ========================================== -->
+        <section id="ketentuan-umum"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div
+            class="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 04</span>
+            <span>•</span>
+            <span>Poin Regulasi</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-6 flex items-center justify-between">
+            <span>Ketentuan Umum</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              6</span>
+          </h2>
+
+          <div class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+            <div
+              class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span
+                class="w-6 h-6 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">1</span>
+              <div><strong>Kategori lomba adalah umum.</strong> Terbuka untuk pelajar, mahasiswa, dan masyarakat umum.
+              </div>
+            </div>
+
+            <div
+              class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span
+                class="w-6 h-6 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">2</span>
+              <div>Setiap tim diwajibkan membayar biaya administrasi pendaftaran sebesar <strong>Rp 150.000,- /
+                  tim</strong>.</div>
+            </div>
+
+            <div
+              class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span
+                class="w-6 h-6 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">3</span>
+              <div>Peserta yang mengundurkan diri saat pertandingan atau mendapat sanksi diskualifikasi <strong>tidak
+                  dapat mengajukan refund</strong> biaya pendaftaran.</div>
+            </div>
+
+            <div
+              class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span
+                class="w-6 h-6 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">4</span>
+              <div>Setiap individu dan robot <strong>hanya diperbolehkan terdaftar pada satu tim</strong> saja.</div>
+            </div>
+
+            <div
+              class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span
+                class="w-6 h-6 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">5</span>
+              <div>Waktu pendaftaran: <strong>12 November 2026 s.d. 3 Desember 2026</strong>. Technical Meeting (TM)
+                Online dilaksanakan pada <strong>Sabtu, 5 Desember 2026</strong>.</div>
+            </div>
+
+            <div
+              class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span
+                class="w-6 h-6 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">6</span>
+              <div>Perlombaan dilaksanakan pada <strong>Rabu, 9 Desember 2026 – Kamis, 10 Desember 2026</strong>.</div>
+            </div>
+
+            <div
+              class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span
+                class="w-6 h-6 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">7</span>
+              <div>Setiap robot dan perlengkapan perlombaan menjadi tanggung jawab dan disiapkan oleh masing-masing
+                tim/peserta.</div>
+            </div>
+
+            <div
+              class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span
+                class="w-6 h-6 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">8</span>
+              <div>Segala bentuk kerusakan pada robot/perlengkapan bukan tanggung jawab panitia baik sebelum, saat,
+                maupun sesudah lomba.</div>
+            </div>
+
+            <div
+              class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span
+                class="w-6 h-6 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold flex items-center justify-center shrink-0 text-xs">9</span>
+              <div>Setiap individu diwajibkan untuk menaati protokol kesehatan yang berlaku dengan bijak.</div>
+            </div>
+
+            <div
+              class="flex items-start gap-3 p-3 rounded-xl bg-cyan-500/10 dark:bg-cyan-500/20 border border-cyan-500/30 font-semibold text-slate-800 dark:text-slate-100">
+              <span
+                class="w-6 h-6 rounded-full bg-cyan-500 text-white font-bold flex items-center justify-center shrink-0 text-xs">10</span>
+              <div>Jumlah peserta dibatasi <strong>maksimal 48 tim</strong> dengan sistem pendaftaran tercepat (first
+                come, first served).</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 5. KETENTUAN DAN PERSYARATAN PESERTA -->
+        <!-- ========================================== -->
+        <section id="ketentuan-peserta"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div
+            class="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 05</span>
+            <span>•</span>
+            <span>Komposisi Tim</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-6 flex items-center justify-between">
+            <span>Ketentuan & Persyaratan Peserta</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              7</span>
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+            <div
+              class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span class="font-bold text-slate-900 dark:text-white block mb-1">1. Status Peserta</span>
+              Peserta bersifat umum. Pelajar, mahasiswa, maupun umum diperbolehkan mendaftar.
+            </div>
+
+            <div
+              class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span class="font-bold text-slate-900 dark:text-white block mb-1">2. Asal Instansi</span>
+              Jumlah pendaftaran tim dari satu instansi <strong>tidak dibatasi</strong>.
+            </div>
+
+            <div
+              class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span class="font-bold text-slate-900 dark:text-white block mb-1">3. Jumlah Anggota & Pembimbing</span>
+              Dalam 1 tim terdiri dari <strong>2 orang peserta</strong> dengan <strong>1 pembimbing (opsional)</strong>.
+              Boleh berasal dari institusi berbeda di seluruh Indonesia.
+            </div>
+
+            <div
+              class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span class="font-bold text-slate-900 dark:text-white block mb-1">4. Eksklusivitas Pendaftaran</span>
+              Setiap peserta dan robot <strong>hanya diperkenankan terdaftar pada satu tim saja</strong>.
+            </div>
+
+            <div
+              class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 md:col-span-2">
+              <span class="font-bold text-slate-900 dark:text-white block mb-1">5. Revisi Anggota Tim</span>
+              Perubahan nama anggota atau tim maksimal dilakukan saat <strong>Technical Meeting</strong> berlangsung.
+              Setelah TM selesai, perubahan tidak akan diakui panitia.
+            </div>
+
+            <div
+              class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span class="font-bold text-slate-900 dark:text-white block mb-1">6. Norma Nama Tim</span>
+              Tidak diperkenankan mengandung unsur SARA, penghinaan, pornografi, atau pelecehan.
+            </div>
+
+            <div
+              class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <span class="font-bold text-slate-900 dark:text-white block mb-1">7. Kesamaan Nama</span>
+              Jika ada kesamaan nama tim, diprioritaskan tim yang menyelesaikan administrasi lebih awal.
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 6. TIMELINE & BIAYA -->
+        <!-- ========================================== -->
+        <section id="timeline"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div
+            class="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 06</span>
+            <span>•</span>
+            <span>Jadwal Resmi</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-6 flex items-center justify-between">
+            <span>Timeline & Biaya Pendaftaran</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              9</span>
+          </h2>
+
+          <!-- Fee Callout Card -->
+          <div
+            class="mb-6 p-4 rounded-xl bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-transparent border border-cyan-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <span class="text-xs font-semibold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider block">Biaya
+                Registrasi Lomba</span>
+              <span class="text-2xl sm:text-3xl font-display font-extrabold text-slate-900 dark:text-white">Rp 150.000,-
+                <span class="text-xs font-normal text-slate-500">/ tim</span></span>
+            </div>
+            <div
+              class="text-xs text-slate-600 dark:text-slate-300 bg-white/70 dark:bg-slate-800/70 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 max-w-xs">
+              Maksimal 48 tim. Pembayaran dilakukan terverifikasi via portal resmi www.infofest.id
+            </div>
+          </div>
+
+          <!-- Timeline Vertical Track -->
+          <div
+            class="relative pl-6 sm:pl-8 space-y-6 before:absolute before:left-2.5 sm:before:left-3.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200 dark:before:bg-slate-800">
+
+            <!-- Item 1 -->
+            <div class="relative group">
+              <div
+                class="absolute -left-6 sm:-left-8 top-1 w-5 h-5 rounded-full bg-cyan-500 border-4 border-white dark:border-slate-900 shadow">
+              </div>
+              <div
+                class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/40 transition-colors">
+                <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+                  <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Registrasi Peserta</h4>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">Online</span>
+                </div>
+                <p class="text-xs sm:text-sm font-mono text-cyan-600 dark:text-cyan-400 font-semibold">12 November 2026
+                  - 3 Desember 2026</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Pendaftaran dibuka hingga kuota 48 tim
+                  terpenuhi melalui website resmi.</p>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="relative group">
+              <div
+                class="absolute -left-6 sm:-left-8 top-1 w-5 h-5 rounded-full bg-blue-500 border-4 border-white dark:border-slate-900 shadow">
+              </div>
+              <div
+                class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 hover:border-blue-500/40 transition-colors">
+                <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+                  <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Technical Meeting (TM)</h4>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">Online</span>
+                </div>
+                <p class="text-xs sm:text-sm font-mono text-blue-600 dark:text-blue-400 font-semibold">Sabtu, 5 Desember
+                  2026</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Penjelasan teknis, pengundian grup otomatis
+                  oleh sistem, batas akhir revisi data tim.</p>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="relative group">
+              <div
+                class="absolute -left-6 sm:-left-8 top-1 w-5 h-5 rounded-full bg-indigo-500 border-4 border-white dark:border-slate-900 shadow">
+              </div>
+              <div
+                class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/40 transition-colors">
+                <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+                  <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Hari Pelaksanaan Perlombaan
+                  </h4>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">Luring
+                    / On-site</span>
+                </div>
+                <p class="text-xs sm:text-sm font-mono text-indigo-600 dark:text-indigo-400 font-semibold">Rabu, 9
+                  Desember 2026 – Kamis, 10 Desember 2026</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Lokasi: <strong>Aula Fakultas Teknik
+                    Unhaz</strong> (Pengecekan robot, babak grup, dan babak gugur).</p>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="relative group">
+              <div
+                class="absolute -left-6 sm:-left-8 top-1 w-5 h-5 rounded-full bg-amber-500 border-4 border-white dark:border-slate-900 shadow">
+              </div>
+              <div
+                class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 hover:border-amber-500/40 transition-colors">
+                <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+                  <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white">Awarding Ceremony</h4>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">Luring</span>
+                </div>
+                <p class="text-xs sm:text-sm font-mono text-amber-600 dark:text-amber-400 font-semibold">Sabtu, 12
+                  Desember 2026</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Lokasi: <strong>Aula Fakultas Teknik
+                    Unhaz</strong> (Pengumuman juara & penyerahan penghargaan).</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 7. ALUR PENDAFTARAN -->
+        <!-- ========================================== -->
+        <section id="alur-pendaftaran"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div
+            class="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 07</span>
+            <span>•</span>
+            <span>Step by Step</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-6 flex items-center justify-between">
+            <span>Ketentuan & Alur Pendaftaran</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              10</span>
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <div
+              class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 relative">
+              <span class="text-xs font-mono font-bold text-cyan-500 block mb-1">LANGKAH 01</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-1.5">Pahami Juknis & Registrasi</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300">
+                Setiap peserta <strong>DIWAJIBKAN</strong> membaca dan memahami seluruh ketentuan Guidebook Infofest
+                2026. Lakukan pendaftaran melalui <a href="https://forms.gle/U7KSpKvCLFzufi999" target="_blank"
+                  rel="noopener noreferrer" class="text-cyan-500 underline font-semibold">Formulir Pendaftaran
+                  Resmi</a>.
+              </p>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 relative">
+              <span class="text-xs font-mono font-bold text-cyan-500 block mb-1">LANGKAH 02</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-1.5">Pembayaran</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300">
+                Selesaikan pembayaran biaya administrasi pendaftaran (Rp 150.000) melalui kanal pembayaran resmi di
+                website Infofest.
+              </p>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 md:col-span-2">
+              <span class="text-xs font-mono font-bold text-cyan-500 block mb-1">LANGKAH 03</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-2">Unggah Twibbon Resmi</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-600 dark:text-slate-300">
+                <div class="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                  <span class="font-semibold block text-slate-900 dark:text-white">Ketentuan Akun:</span>
+                  Unggah twibbon di feed Instagram masing-masing anggota. Wajib follow akun resmi
+                  <strong>@hmpsi.ftuhamzanwadi</strong> dan akun tidak boleh di-private.
+                </div>
+                <div class="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                  <span class="font-semibold block text-slate-900 dark:text-white">Template & Retensi:</span>
+                  Unduh template twibbon di <a href="https://bit.ly/TwibbonTC2026" target="_blank"
+                    class="text-cyan-500 underline font-semibold">bit.ly/TwibbonTC2026</a>. Postingan tidak boleh
+                  dihapus sebelum periode pendaftaran usai.
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 relative">
+              <span class="text-xs font-mono font-bold text-cyan-500 block mb-1">LANGKAH 04</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-1.5">Verifikasi Berkas</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300">
+                Proses verifikasi berkas dilakukan oleh admin panitia dalam waktu maksimal <strong>3 x 24 jam</strong>
+                di dashboard website.
+              </p>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 relative">
+              <span class="text-xs font-mono font-bold text-cyan-500 block mb-1">LANGKAH 05 & 06</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-1.5">Grup WhatsApp Peserta</h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300">
+                Seluruh peserta wajib bergabung ke grup WhatsApp cabang lomba SumoBot melalui tautan yang ada pada
+                dashboard akun peserta.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 8. SPESIFIKASI ROBOT -->
+        <!-- ========================================== -->
+        <section id="spesifikasi-robot"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div
+            class="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 08</span>
+            <span>•</span>
+            <span>Regulasi Teknis</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-6 flex items-center justify-between">
+            <span>Spesifikasi Robot</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              12</span>
+          </h2>
+
+          <!-- Core Spec Cards Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+              <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-500 flex items-center justify-center mb-3">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                </svg>
+              </div>
+              <h4 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Dimensi Maksimum</h4>
+              <p class="text-xl font-display font-bold text-slate-900 dark:text-white mt-1">10 × 10 cm</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Diukur saat posisi start robot. Tinggi robot
+                <strong>tidak dibatasi</strong>.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+              <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-500 flex items-center justify-center mb-3">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                </svg>
+              </div>
+              <h4 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Massa Total</h4>
+              <p class="text-xl font-display font-bold text-slate-900 dark:text-white mt-1">Maks. 500 Gram</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Termasuk baterai di dalam robot. Berat remote
+                kontrol tidak dihitung.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+              <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center mb-3">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h4 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Remote Khusus</h4>
+              <p class="text-xl font-display font-bold text-slate-900 dark:text-white mt-1">START & STOP</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Eksklusif hanya untuk pemicu start & emergency
+                stop. Dilarang remote gerak.</p>
+            </div>
+
+          </div>
+
+          <!-- Mandatory Specs List -->
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3">10 Poin Regulasi
+            Konstruksi Robot</h3>
+          <div class="space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+
+            <div
+              class="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex items-start gap-2.5">
+              <span class="font-mono text-cyan-500 font-bold">01.</span>
+              <span><strong>Robot Autonomous:</strong> Robot yang digunakan adalah robot autonomous murni. Tidak
+                diperkenankan menggunakan robot semi-autonomous atau RC steer.</span>
+            </div>
+
+            <div
+              class="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex items-start gap-2.5">
+              <span class="font-mono text-cyan-500 font-bold">02.</span>
+              <span><strong>Dimensi & Massa:</strong> Dimensi maksimum 10 cm x 10 cm dengan tinggi tidak dibatasi
+                (diukur saat posisi start). Massa robot total termasuk baterai maksimal 500 gram (tidak termasuk
+                remote).</span>
+            </div>
+
+            <div
+              class="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex items-start gap-2.5">
+              <span class="font-mono text-cyan-500 font-bold">03.</span>
+              <span><strong>Remote Kontrol Mandiri:</strong> Setiap tim wajib menyediakan remote kontrol mandiri yang
+                didesain <strong>SECARA EKSKLUSIF</strong> hanya untuk mengirimkan instruksi START dan STOP.</span>
+            </div>
+
+            <div
+              class="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex items-start gap-2.5">
+              <span class="font-mono text-cyan-500 font-bold">04.</span>
+              <span><strong>Pelabelan Robot:</strong> Robot harus diberi label dengan <strong>nama tim
+                  pada bagian depan</strong> robot. Jenis font dan ukuran bebas tetapi harus terlihat jelas oleh
+                wasit.</span>
+            </div>
+
+            <!-- Warning/Prohibition Items -->
+            <div
+              class="p-3 rounded-lg bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-200 flex items-start gap-2.5">
+              <span class="font-mono text-rose-500 font-bold">05.</span>
+              <span><strong>Larangan Merusak:</strong> Robot tidak boleh memiliki perangkat yang merusak arena
+                pertandingan dan membalikkan robot lawan dengan cara melempar (no destructive flippers).</span>
+            </div>
+
+            <div
+              class="p-3 rounded-lg bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-200 flex items-start gap-2.5">
+              <span class="font-mono text-rose-500 font-bold">06.</span>
+              <span><strong>Larangan Pengganggu Sensor:</strong> Tidak diperbolehkan memiliki perangkat yang mengganggu
+                kinerja robot lawan seperti jammer sinyal, lampu strobe, laser berlebih, dan sejenisnya.</span>
+            </div>
+
+            <div
+              class="p-3 rounded-lg bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-200 flex items-start gap-2.5">
+              <span class="font-mono text-rose-500 font-bold">07.</span>
+              <span><strong>Larangan Sistem Lekat:</strong> Tidak memiliki sistem pelekat pada permukaan arena seperti
+                suction cup, diafragma, roda berperekat/lengket (sticky tires), atau zat perekat.</span>
+            </div>
+
+            <div
+              class="p-3 rounded-lg bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-200 flex items-start gap-2.5">
+              <span class="font-mono text-rose-500 font-bold">08.</span>
+              <span><strong>Larangan Senjata Berbahaya:</strong> Tidak boleh menggunakan proyektil, bilah gergaji aktif,
+                atau perangkat yang mudah terbakar.</span>
+            </div>
+
+            <div
+              class="p-3 rounded-lg bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-200 flex items-start gap-2.5">
+              <span class="font-mono text-rose-500 font-bold">09.</span>
+              <span><strong>Larangan Memecah Diri:</strong> Selama lomba berlangsung, robot dilarang memecah diri
+                menjadi beberapa bagian atau robot secara sengaja.</span>
+            </div>
+
+            <div
+              class="p-3 rounded-lg bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-200 flex items-start gap-2.5">
+              <span class="font-mono text-rose-500 font-bold">10.</span>
+              <span><strong>Larangan Downforce Buatan:</strong> Robot dilarang memiliki pompa vakum (vacuum fan) atau
+                magnet penambah downforce ke arena.</span>
+            </div>
+
+          </div>
+
+          <!-- INTERACTIVE CHECKLIST TOOL -->
+          <div id="uji-kelayakan-card"
+            class="mt-8 p-5 sm:p-6 rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 text-white border border-cyan-500/30 shadow-xl">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 rounded-lg bg-cyan-500/20 text-cyan-400">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </span>
+                <h3 class="font-display font-bold text-base sm:text-lg">Simulasi Uji Kelayakan Robot (Self-Check)</h3>
+              </div>
+              <span id="checklist-score" class="text-xs font-mono px-2 py-1 rounded bg-cyan-500/20 text-cyan-300">0 / 6
+                Lulus</span>
+            </div>
+
+            <p class="text-xs text-slate-400 mb-4">
+              Centang setiap parameter di bawah ini untuk memastikan robot tim Anda siap lulus pada sesi pengecekan
+              panitia (uji dimensi, berat, suction, dan bagian tajam).
+            </p>
+
+            <div class="space-y-2.5 text-xs sm:text-sm">
+              <label
+                class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 cursor-pointer transition-colors">
+                <input type="checkbox"
+                  class="checklist-item rounded border-slate-700 text-cyan-500 focus:ring-cyan-500 w-4 h-4">
+                <span>Dimensi robot saat posisi start pas atau di bawah 10 cm x 10 cm.</span>
+              </label>
+
+              <label
+                class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 cursor-pointer transition-colors">
+                <input type="checkbox"
+                  class="checklist-item rounded border-slate-700 text-cyan-500 focus:ring-cyan-500 w-4 h-4">
+                <span>Berat total robot beserta baterai tidak lebih dari 500 gram.</span>
+              </label>
+
+              <label
+                class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 cursor-pointer transition-colors">
+                <input type="checkbox"
+                  class="checklist-item rounded border-slate-700 text-cyan-500 focus:ring-cyan-500 w-4 h-4">
+                <span>Tersedia remote terpisah khusus HANYA untuk sinyal START dan STOP.</span>
+              </label>
+
+              <label
+                class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 cursor-pointer transition-colors">
+                <input type="checkbox"
+                  class="checklist-item rounded border-slate-700 text-cyan-500 focus:ring-cyan-500 w-4 h-4">
+                <span>Label nama tim telah tertempel jelas di bagian depan robot.</span>
+              </label>
+
+              <label
+                class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 cursor-pointer transition-colors">
+                <input type="checkbox"
+                  class="checklist-item rounded border-slate-700 text-cyan-500 focus:ring-cyan-500 w-4 h-4">
+                <span>Uji Bebas Suction: Tidak ada magnet downforce, vakum, roda lengket/perekat.</span>
+              </label>
+
+              <label
+                class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 cursor-pointer transition-colors">
+                <input type="checkbox"
+                  class="checklist-item rounded border-slate-700 text-cyan-500 focus:ring-cyan-500 w-4 h-4">
+                <span>Uji Bagian Tajam & Keamanan: Tidak ada senjata proyektil, api, atau pembalik pelempar.</span>
+              </label>
+            </div>
+
+            <div id="checklist-result-banner"
+              class="mt-4 p-3 rounded-lg bg-slate-800 text-center text-xs font-semibold text-slate-300">
+              Lengkapi centang di atas untuk melihat status kelayakan robot tim Anda.
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 9. PERATURAN DAN KETENTUAN PERLOMBAAN -->
+        <!-- ========================================== -->
+        <section id="peraturan-perlombaan"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div
+            class="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 09</span>
+            <span>•</span>
+            <span>Tahapan Lomba</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-6 flex items-center justify-between">
+            <span>Peraturan & Ketentuan Perlombaan</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              14</span>
+          </h2>
+
+          <!-- 4 Stages Tabs / Cards -->
+          <div class="space-y-4">
+
+            <!-- Phase 1 -->
+            <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-3">
+                <span
+                  class="w-6 h-6 rounded-md bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-xs font-mono">1</span>
+                <span>Registrasi Ulang & Uji Kelayakan Robot</span>
+              </h3>
+              <ul class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-1.5 list-disc list-inside">
+                <li>Peserta <strong>DIWAJIBKAN</strong> membawa kartu identitas serta mengisi form registrasi ulang.
+                </li>
+                <li>Pengecekan teknis mencakup 4 aspek: <strong>dimensi robot, berat robot, uji suction/downforce, dan
+                    uji bagian tajam</strong>.</li>
+                <li>Peserta dan robot yang tidak disetujui panitia <strong>TIDAK DIPERBOLEHKAN</strong> mengikuti
+                  perlombaan.</li>
+              </ul>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-3">
+                <span
+                  class="w-6 h-6 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xs font-mono">2</span>
+                <span>Sebelum Pertandingan</span>
+              </h3>
+              <ul class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-1.5 list-disc list-inside">
+                <li>Setiap tim, peserta, dan robot <strong>WAJIB lulus administrasi serta uji kelayakan</strong>.</li>
+                <li>Pemanggilan untuk uji kelayakan dan pengecekan dilakukan sekali sebelum race oleh LO tiap tim.</li>
+                <li>Tim/peserta yang belum atau tidak bertanding dilarang mengganggu tim atau robot pihak lain.</li>
+              </ul>
+            </div>
+
+            <!-- Phase 3 -->
+            <div class="p-5 rounded-xl bg-cyan-500/5 dark:bg-cyan-500/10 border border-cyan-500/20">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-3">
+                <span
+                  class="w-6 h-6 rounded-md bg-cyan-500 text-white flex items-center justify-center text-xs font-mono">3</span>
+                <span>Saat Berlangsungnya Pertandingan</span>
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
+                <div
+                  class="p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                  <span class="font-bold block text-slate-900 dark:text-white mb-1">Posisi & Pemanggilan</span>
+                  Peserta penonton wajib di luar arena. Handler harus siap berdasarkan rundown pemanggilan panitia.
+                </div>
+                <div
+                  class="p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                  <span class="font-bold block text-slate-900 dark:text-white mb-1">Pengoperasian Remote</span>
+                  HANYA digunakan untuk START setelah aba-aba wasit, dan <strong>WAJIB SEGERA STOP</strong> saat juri
+                  menyatakan poin tercipta.
+                </div>
+                <div
+                  class="p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                  <span class="font-bold block text-slate-900 dark:text-white mb-1">Tanpa Dorongan Manual</span>
+                  Saat START dilarang memberikan bantuan dorongan eksternal pada robot.
+                </div>
+                <div
+                  class="p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                  <span class="font-bold block text-slate-900 dark:text-white mb-1">Dilarang Ganti
+                    Baterai/Komponen</span>
+                  Peserta <strong>DILARANG</strong> mengganti catu daya/baterai dan komponen lain selama pertandingan
+                  berlangsung.
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 4 -->
+            <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-3">
+                <span
+                  class="w-6 h-6 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xs font-mono">4</span>
+                <span>Sesudah Pertandingan</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                Setiap peserta dan tim tetap harus menjaga semangat, kesehatan, dan sportivitas bertanding. Segala
+                keputusan panitia, wasit, dan dewan juri adalah <strong>hal mutlak dan tidak dapat diganggu
+                  gugat</strong>.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 10. ARENA PERTANDINGAN (INTERACTIVE DOHYO) -->
+        <!-- ========================================== -->
+        <section id="arena-pertandingan"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div
+            class="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 10</span>
+            <span>•</span>
+            <span>Spesifikasi Dohyo</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-6 flex items-center justify-between">
+            <span>Spesifikasi & Petunjuk Arena Pertandingan</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              17</span>
+          </h2>
+
+          <!-- Interactive Dohyo Graphic & Specs -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+
+            <!-- Graphic Canvas / SVG -->
+            <div
+              class="lg:col-span-7 flex flex-col items-center justify-center p-6 rounded-2xl bg-slate-950 border border-slate-800 relative overflow-hidden">
+              <span class="text-[11px] font-mono text-slate-400 uppercase tracking-widest mb-3">Diagram Dohyo SumoBot
+                Infofest 2026</span>
+
+              <!-- SVG Interactive Dohyo -->
+              <div class="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
+
+                <!-- Circular Dohyo Base (77cm) -->
+                <svg viewBox="0 0 400 400" class="w-full h-full drop-shadow-2xl">
+                  <!-- Outer Drop shadow & border -->
+                  <circle cx="200" cy="200" r="185" fill="#111827" stroke="#374151" stroke-width="4" />
+
+                  <!-- White Border Ring (Garis Batas Putih 2.5cm) -->
+                  <circle cx="200" cy="200" r="180" fill="none" stroke="#ffffff" stroke-width="14"
+                    stroke-opacity="0.95" />
+
+                  <!-- Dohyo Surface (HPL Hitam Hardwood) -->
+                  <circle cx="200" cy="200" r="172" fill="#0b0f19" />
+
+                  <!-- Subtle Ring Grid -->
+                  <circle cx="200" cy="200" r="120" fill="none" stroke="#1f2937" stroke-dasharray="4 4"
+                    stroke-width="1" />
+
+                  <!-- Center Point Marker -->
+                  <circle cx="200" cy="200" r="3" fill="#38bdf8" />
+
+                  <!-- Start Lines (Shikiri-sen: Brown 10cm x 1cm, distance 10cm) -->
+                  <!-- Line A (Brown/Cokelat) -->
+                  <rect x="155" y="155" width="90" height="9" rx="2" fill="#b45309" stroke="#d97706" stroke-width="1" />
+                  <!-- Line B (Brown/Cokelat) -->
+                  <rect x="155" y="235" width="90" height="9" rx="2" fill="#b45309" stroke="#d97706" stroke-width="1" />
+
+                  <!-- Dimension Labels Annotations -->
+                  <!-- Diameter Arrow Line -->
+                  <line x1="20" y1="200" x2="380" y2="200" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 3" />
+                  <text x="200" y="130" fill="#38bdf8" font-size="11" font-weight="bold" font-family="monospace"
+                    text-anchor="middle">DIAMETER 77 cm</text>
+
+                  <!-- Start Lines Distance -->
+                  <line x1="260" y1="160" x2="260" y2="240" stroke="#f59e0b" stroke-width="1" />
+                  <text x="285" y="203" fill="#f59e0b" font-size="9" font-family="monospace">JARAK 10 cm</text>
+
+                  <!-- Border Width Callout -->
+                  <text x="200" y="392" fill="#e2e8f0" font-size="10" font-family="monospace" text-anchor="middle">Garis
+                    Tepi Putih (Lebar 2,5 cm)</text>
+                </svg>
+
+              </div>
+
+              <!-- Interactive Legend -->
+              <div class="mt-4 flex flex-wrap items-center justify-center gap-3 text-[11px] font-mono text-slate-300">
+                <span class="flex items-center gap-1.5"><span
+                    class="w-3 h-3 rounded-full bg-[#0b0f19] border border-slate-600"></span> HPL Hitam</span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-white"></span> Garis Putih
+                  (2.5 cm)</span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-[#b45309]"></span> Garis Start
+                  Cokelat (10×1 cm)</span>
+              </div>
+            </div>
+
+            <!-- Specs Text Cards -->
+            <div class="lg:col-span-5 space-y-3.5 text-xs sm:text-sm">
+              <div
+                class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+                <span class="text-xs font-mono text-cyan-600 dark:text-cyan-400 font-semibold block mb-0.5">MATERIAL
+                  UTAMA</span>
+                <h4 class="font-bold text-slate-900 dark:text-white text-sm mb-1">Kayu Keras (Hardwood)</h4>
+                <p class="text-slate-600 dark:text-slate-300">
+                  Dilapisi lapisan akhir (finishing) <strong>HPL (High-Pressure Laminate) berwarna hitam</strong> tahan
+                  gesek dan rata.
+                </p>
+              </div>
+
+              <div
+                class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+                <span class="text-xs font-mono text-cyan-600 dark:text-cyan-400 font-semibold block mb-0.5">DIMENSI
+                  DOHYO</span>
+                <h4 class="font-bold text-slate-900 dark:text-white text-sm mb-1">Diameter 77 cm • Tinggi 2,5 cm</h4>
+                <p class="text-slate-600 dark:text-slate-300">
+                  Arena berbentuk lingkaran dengan ketebalan/tinggi panggung arena sebesar <strong>2,5 cm dari
+                    lantai</strong>.
+                </p>
+              </div>
+
+              <div
+                class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+                <span class="text-xs font-mono text-cyan-600 dark:text-cyan-400 font-semibold block mb-0.5">GARIS &
+                  TANDA ARENA</span>
+                <h4 class="font-bold text-slate-900 dark:text-white text-sm mb-1">Tawashi Putih & Garis Awal Cokelat
+                </h4>
+                <p class="text-slate-600 dark:text-slate-300 space-y-1">
+                  <span>• Garis batas tepi arena berwarna <strong>putih</strong> dengan lebar <strong>2,5
+                      cm</strong>.</span><br>
+                  <span>• Garis awal start di tengah arena berwarna <strong>cokelat</strong> berukuran <strong>10 cm x 1
+                      cm</strong> dengan jarak antar keduanya <strong>10 cm</strong>.</span>
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 11. SISTEM PERLOMBAAN -->
+        <!-- ========================================== -->
+        <section id="sistem-perlombaan"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div
+            class="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 11</span>
+            <span>•</span>
+            <span>Mekanisme Pertandingan</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-6 flex items-center justify-between">
+            <span>Sistem & Format Perlombaan</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              19</span>
+          </h2>
+
+          <!-- Match Quick Rules Chips -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+            <div
+              class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 text-center">
+              <span class="text-[11px] text-slate-500 dark:text-slate-400 block">Jumlah Ronde</span>
+              <span class="text-base font-bold text-slate-900 dark:text-white font-display">3 Ronde</span>
+              <span class="text-[10px] text-slate-400 block mt-0.5">Best of 3</span>
+            </div>
+            <div
+              class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 text-center">
+              <span class="text-[11px] text-slate-500 dark:text-slate-400 block">Durasi Ronde</span>
+              <span class="text-base font-bold text-cyan-500 font-display">1,5 Menit</span>
+              <span class="text-[10px] text-slate-400 block mt-0.5">Total maks 5 mnt</span>
+            </div>
+            <div
+              class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 text-center">
+              <span class="text-[11px] text-slate-500 dark:text-slate-400 block">Time Out</span>
+              <span class="text-base font-bold text-amber-500 font-display">1× per Match</span>
+              <span class="text-[10px] text-slate-400 block mt-0.5">Durasi 1 menit</span>
+            </div>
+            <div
+              class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 text-center">
+              <span class="text-[11px] text-slate-500 dark:text-slate-400 block">Preparation</span>
+              <span class="text-base font-bold text-emerald-500 font-display">1 Menit</span>
+              <span class="text-[10px] text-slate-400 block mt-0.5">Di area steril</span>
+            </div>
+          </div>
+
+          <!-- Format Breakdown: Babak Grup vs Babak Gugur -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+
+            <!-- Babak Grup Card -->
+            <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="font-display font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-cyan-500"></span>
+                  <span>Mekanisme Babak Grup</span>
+                </h3>
+                <span class="text-xs font-mono text-cyan-500 bg-cyan-500/10 px-2 py-0.5 rounded">Tahap 1</span>
+              </div>
+              <ul class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2">
+                <li class="flex items-start gap-2">
+                  <span class="text-cyan-500 font-bold">•</span>
+                  <span>Satu pertandingan terdiri dari 3 ronde yang berlangsung selama total 5 menit.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-cyan-500 font-bold">•</span>
+                  <span>Pertandingan dinyatakan berakhir apabila salah satu tim <strong>memenangkan 2 dari 3
+                      ronde</strong>.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-cyan-500 font-bold">•</span>
+                  <span>Ronde berakhir apabila salah satu tim mencetak poin atau waktu habis.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-cyan-500 font-bold">•</span>
+                  <span>Tim yang lolos dari babak grup adalah <strong>2 tim dengan jumlah poin tertinggi</strong> di
+                    tiap grup.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-cyan-500 font-bold">•</span>
+                  <span>Jika ada kesamaan jumlah poin, akan dilakukan <strong>pertandingan ulang</strong>.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Babak Gugur Card -->
+            <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="font-display font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-indigo-500"></span>
+                  <span>Mekanisme Babak Gugur</span>
+                </h3>
+                <span class="text-xs font-mono text-indigo-500 bg-indigo-500/10 px-2 py-0.5 rounded">Double
+                  Elimination</span>
+              </div>
+              <ul class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2">
+                <li class="flex items-start gap-2">
+                  <span class="text-indigo-500 font-bold">•</span>
+                  <span>Dilakukan <strong>pengundian ulang</strong> secara acak oleh program untuk menentukan lawan
+                    tanding babak berikutnya.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-indigo-500 font-bold">•</span>
+                  <span>Satu pertandingan terdiri dari 3 ronde (total 5 menit) dan berakhir bila tim menang 2
+                    ronde.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-indigo-500 font-bold">•</span>
+                  <span>Menggunakan sistem <strong>Double Elimination</strong>: peserta tereliminasi penuh hanya setelah
+                    <strong>mengalami 2 kali kekalahan</strong>.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-indigo-500 font-bold">•</span>
+                  <span>Pemenang kompetisi ditentukan berdasarkan perolehan poin kemenangan.</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- General Match Protocols A - L -->
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3">Ketentuan
+            Operasional Handler & Wasit</h3>
+          <div
+            class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2.5">
+            <p><strong>Handler & Asisten:</strong> Selama pertandingan, robot dioperasikan oleh 1 handler dan dibantu 1
+              assistant (keduanya dari anggota tim bertanding). Hanya mereka yang boleh mendekat ke arena. Pergantian
+              handler hanya diperkenankan saat jeda antar-ronde.</p>
+            <p><strong>Protokol Remote:</strong> Pertandingan dimulai setelah aba-aba START dari wasit. Begitu wasit
+              menyatakan poin tercetak, kedua handler <strong>WAJIB SEGERA mematikan robot via remote</strong>. Tim yang
+              belum bertanding wajib mematikan remote agar frekuensi tidak terganggu.</p>
+            <p><strong>Robot Terkunci (Interlock):</strong> Jika kedua robot terkunci satu sama lain selama <strong>10
+                detik</strong> atau terjatuh secara bersamaan, waktu dihentikan, robot dikembalikan ke posisi start
+              semula, lalu pertandingan dilanjutkan sisa waktu.</p>
+            <p><strong>Aturan Time Out:</strong> Hanya diberikan 1 kali (1 menit) setelah suatu ronde berakhir jika
+              diminta oleh peserta ke wasit. Selama time out, robot lawan tetap di arena dan <strong>TIDAK DIPERBOLEHKAN
+                mengganti baterai atau komponen</strong>.</p>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 12. PELANGGARAN DAN SANKSI -->
+        <!-- ========================================== -->
+        <section id="pelanggaran-sanksi"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div
+            class="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 12</span>
+            <span>•</span>
+            <span>Disiplin & Sanksi</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-6 flex items-center justify-between">
+            <span>Pelanggaran & Sanksi</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              22</span>
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <div class="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-900 dark:text-rose-100">
+              <div class="flex items-center gap-2 font-bold text-sm text-rose-600 dark:text-rose-400 mb-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                </svg>
+                <span>Sanksi Diskualifikasi Langsung</span>
+              </div>
+              <ul class="text-xs sm:text-sm space-y-2 list-disc list-inside">
+                <li>Melanggar tata tertib yang telah ditentukan panitia.</li>
+                <li>Membuat kegaduhan atau keributan saat berlangsungnya perlombaan.</li>
+                <li>Tidak memenuhi syarat perlombaan atau gagal uji kelayakan tanpa perbaikan.</li>
+              </ul>
+            </div>
+
+            <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-100">
+              <div class="flex items-center gap-2 font-bold text-sm text-amber-600 dark:text-amber-400 mb-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Toleransi Keterlambatan (WO)</span>
+              </div>
+              <div class="text-xs sm:text-sm space-y-2">
+                <p>
+                  Apabila peserta tidak hadir setelah dilakukan <strong>pemanggilan sebanyak tiga (3) kali</strong>,
+                  panitia memberikan waktu toleransi selama <strong>3 (tiga) menit</strong> untuk hadir di area tanding.
+                </p>
+                <p class="font-semibold text-amber-700 dark:text-amber-300">
+                  Jika tetap tidak hadir hingga batas waktu toleransi tersebut, tim lawan dinyatakan sebagai PEMENANG
+                  (Walk Out / WO).
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 13. KRITERIA PENILAIAN -->
+        <!-- ========================================== -->
+        <section id="kriteria-penilaian"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div
+            class="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 13</span>
+            <span>•</span>
+            <span>Penetapan Pemenang</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-6 flex items-center justify-between">
+            <span>Kriteria Penilaian</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              23</span>
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <div
+              class="p-5 rounded-xl bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 flex items-start gap-4">
+              <div
+                class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-display font-bold text-lg shrink-0">
+                +1
+              </div>
+              <div>
+                <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white mb-1">Menjatuhkan Lawan
+                  (Dohyo-iri)</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                  Robot yang berhasil menjatuhkan robot lawan dari arena atau robot yang keluar dari arena (telah
+                  menyentuh lantai luar) paling akhir akan <strong>diberi poin 1 (satu)</strong>.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="p-5 rounded-xl bg-cyan-500/5 dark:bg-cyan-500/10 border border-cyan-500/20 flex items-start gap-4">
+              <div
+                class="w-10 h-10 rounded-xl bg-cyan-500 text-white flex items-center justify-center font-display font-bold text-lg shrink-0">
+                +1
+              </div>
+              <div>
+                <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white mb-1">Robot Lawan Macet /
+                  Non-Aktif</h4>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                  Apabila robot lawan tidak dapat bergerak / berhenti bergerak selama <strong>10 detik</strong>
+                  berturut-turut, maka tim lawan secara otomatis <strong>mendapatkan poin 1 (satu)</strong>.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 14. HADIAH & APRESIASI -->
+        <!-- ========================================== -->
+        <section id="hadiah"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div class="flex items-center gap-2.5 text-amber-500 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 14</span>
+            <span>•</span>
+            <span>Apresiasi Prestasi</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-6 flex items-center justify-between">
+            <span>Hadiah & Penghargaan</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              24</span>
+          </h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+
+            <!-- Juara 1 -->
+            <div
+              class="p-5 rounded-xl bg-gradient-to-b from-amber-500/10 to-transparent border border-amber-500/30 text-center relative overflow-hidden">
+              <div
+                class="w-10 h-10 rounded-full bg-amber-500 text-white font-display font-bold text-base flex items-center justify-center mx-auto mb-2 shadow-lg shadow-amber-500/30">
+                1
+              </div>
+              <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">JUARA I</h4>
+              <p class="text-xs text-amber-600 dark:text-amber-400 font-semibold mt-0.5">National Champion</p>
+              <div class="mt-3 pt-3 border-t border-amber-500/20 text-xs text-slate-600 dark:text-slate-300 space-y-1">
+                <p>🏆 Trophy Eksklusif</p>
+                <p>📜 Sertifikat Juara Resmi</p>
+                <p>💰 Uang Pembinaan</p>
+              </div>
+            </div>
+
+            <!-- Juara 2 -->
+            <div
+              class="p-5 rounded-xl bg-gradient-to-b from-slate-400/10 to-transparent border border-slate-300 dark:border-slate-700 text-center relative overflow-hidden">
+              <div
+                class="w-10 h-10 rounded-full bg-slate-400 text-white font-display font-bold text-base flex items-center justify-center mx-auto mb-2 shadow">
+                2
+              </div>
+              <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">JUARA II</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold mt-0.5">Runner-Up</p>
+              <div
+                class="mt-3 pt-3 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300 space-y-1">
+                <p>🏆 Trophy Penghargaan</p>
+                <p>📜 Sertifikat Juara Resmi</p>
+                <p>💰 Uang Pembinaan</p>
+              </div>
+            </div>
+
+            <!-- Juara 3 -->
+            <div
+              class="p-5 rounded-xl bg-gradient-to-b from-amber-700/10 to-transparent border border-amber-700/30 text-center relative overflow-hidden">
+              <div
+                class="w-10 h-10 rounded-full bg-amber-700 text-white font-display font-bold text-base flex items-center justify-center mx-auto mb-2 shadow">
+                3
+              </div>
+              <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">JUARA III</h4>
+              <p class="text-xs text-amber-700 dark:text-amber-500 font-semibold mt-0.5">3rd Place</p>
+              <div class="mt-3 pt-3 border-t border-amber-700/20 text-xs text-slate-600 dark:text-slate-300 space-y-1">
+                <p>🏆 Trophy Penghargaan</p>
+                <p>📜 Sertifikat Juara Resmi</p>
+                <p>💰 Uang Pembinaan</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div
+            class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600 dark:text-slate-300">
+            <div>
+              <strong class="text-slate-900 dark:text-white">Sertifikat Seluruh Peserta:</strong>
+              Seluruh peserta yang terdaftar resmi dan mengikuti pertandingan akan menerima E-Certificate Resmi Tingkat
+              Nasional dari Fakultas Teknik Universitas Hamzanwadi.
+            </div>
+            <div
+              class="shrink-0 text-[11px] font-mono text-cyan-500 bg-cyan-500/10 px-3 py-1.5 rounded-lg border border-cyan-500/20">
+              Awarding: 12 Des 2026
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 15. CONTACT PERSON & PENUTUP -->
+        <!-- ========================================== -->
+        <section id="contact"
+          class="guide-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 shadow-sm transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div
+            class="flex items-center gap-2.5 text-cyan-600 dark:text-cyan-400 font-mono text-xs uppercase tracking-wider mb-2">
+            <span>Bagian 15</span>
+            <span>•</span>
+            <span>Bantuan & Saluran Resmi</span>
+          </div>
+
+          <h2
+            class="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white mb-4 flex items-center justify-between">
+            <span>Penutup & Contact Person</span>
+            <span
+              class="text-xs font-mono font-normal text-slate-400 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-md">Hal.
+              25</span>
+          </h2>
+
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+            Demikian panduan mengenai petunjuk teknis perlombaan Sumobot pada Infofest 2026 ini dibuat. Diharapkan
+            segala persyaratan dan ketentuan dapat ditaati dan dilaksanakan oleh setiap individu dan tim baik sebelum,
+            saat, maupun sesudah perlombaan berlangsung. Tetap semangat para petarung untuk menjadi pemenang dalam
+            Infofest 2026 ini. <strong>Junjung segala kejujuran dan semangat sportivitas serta selamat
+              bertanding!</strong>
+          </p>
+
+          <!-- Contact Cards Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+
+            <!-- WhatsApp Direct Card 1: Jea -->
+            <a href="https://wa.me/6287825182361?text=Halo%20Panitia%20Sumobot%20Infofest%202026,%20saya%20ingin%20bertanya"
+              target="_blank" rel="noopener noreferrer"
+              class="p-4 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/15 border border-emerald-500/30 transition-all flex items-center gap-3.5 group">
+              <div
+                class="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+                </svg>
+              </div>
+              <div class="min-w-0">
+                <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 block">Contact Person 1</span>
+                <h4 class="font-bold text-base text-slate-900 dark:text-white truncate">Jea</h4>
+                <p class="text-xs font-mono text-slate-500 dark:text-slate-400 mt-0.5">+62 878-2518-2361</p>
+              </div>
+            </a>
+
+            <!-- WhatsApp Direct Card 2: Rizka -->
+            <a href="https://wa.me/6287821022615?text=Halo%20Panitia%20Sumobot%20Infofest%202026,%20saya%20ingin%20bertanya"
+              target="_blank" rel="noopener noreferrer"
+              class="p-4 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/15 border border-emerald-500/30 transition-all flex items-center gap-3.5 group">
+              <div
+                class="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+                </svg>
+              </div>
+              <div class="min-w-0">
+                <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 block">Contact Person 2</span>
+                <h4 class="font-bold text-base text-slate-900 dark:text-white truncate">Rizka</h4>
+                <p class="text-xs font-mono text-slate-500 dark:text-slate-400 mt-0.5">+62 878-2102-2615</p>
+              </div>
+            </a>
+
+            <!-- Official Email Card -->
+            <a href="mailto:infofest@hamzanwadi.ac.id"
+              class="p-4 rounded-xl bg-blue-500/10 hover:bg-blue-500/15 border border-blue-500/30 transition-all flex items-center gap-3.5 group sm:col-span-2 lg:col-span-1">
+              <div
+                class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="min-w-0">
+                <span class="text-xs font-semibold text-blue-600 dark:text-blue-400 block">Email Sekretariat</span>
+                <h4 class="font-bold text-base text-slate-900 dark:text-white truncate">infofest@hamzanwadi.ac.id</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 truncate">Fakultas Teknik Universitas
+                  Hamzanwadi</p>
+              </div>
+            </a>
+
+          </div>
+
+          <!-- Social Channels Row -->
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+            <span class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider block mb-3">Media
+              Sosial Resmi</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <a href="https://instagram.com/hmpsi.ftuhamzanwadi" target="_blank" rel="noopener noreferrer"
+                class="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-pink-500/40 hover:text-pink-500 flex items-center gap-2.5 transition-colors">
+                <span class="text-base">📸</span>
+                <div>
+                  <span class="text-[10px] text-slate-400 block">Instagram</span>
+                  <span class="font-semibold text-slate-800 dark:text-slate-200">@hmpsi.ftuhamzanwadi</span>
+                </div>
+              </a>
+              <a href="https://tiktok.com/@hmpsi.ftuhamzanwadi" target="_blank" rel="noopener noreferrer"
+                class="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/40 hover:text-cyan-500 flex items-center gap-2.5 transition-colors">
+                <span class="text-base">🎵</span>
+                <div>
+                  <span class="text-[10px] text-slate-400 block">TikTok</span>
+                  <span class="font-semibold text-slate-800 dark:text-slate-200">@hmpsi.ftuhamzanwadi</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Clean Minimalist Footer -->
+  <footer
+    class="border-t border-slate-200 dark:border-slate-800/80 bg-white dark:bg-slate-950 py-8 text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-5">
+      <div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+        <div
+          class="flex items-center gap-2.5 bg-slate-50 dark:bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800">
+          <img src="assets/logo-ft-unhaz-clean.png" alt="Logo FT Unhaz" class="w-6 h-6 object-contain">
+          <span class="h-4 w-px bg-slate-200 dark:bg-slate-700"></span>
+          <img src="assets/logo-infofest.png" alt="Logo Infofest 2026" class="w-7 h-7 object-contain">
+          <span class="h-4 w-px bg-slate-200 dark:bg-slate-700"></span>
+          <img src="assets/logo-orion-clean.png" alt="Logo Orion" class="w-6 h-6 object-contain dark:invert">
+        </div>
+        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
+          <span class="font-display font-bold text-slate-900 dark:text-white">INFOFEST 2026</span>
+          <span>•</span>
+          <span>Fakultas Teknik Universitas Hamzanwadi</span>
+          <span class="hidden sm:inline">•</span>
+          <span class="w-full sm:w-auto text-[11px] sm:text-xs">Guidebook SumoBot Autonomous</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="#hero" class="hover:text-cyan-500 transition-colors">Kembali ke Atas ↑</a>
+        <a href="https://www.infofest.id" target="_blank" class="hover:text-cyan-500 transition-colors">Portal Resmi
+          www.infofest.id</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script for Interactivity -->
+  <script src="script.js"></script>
+</body>
+
+</html>
