@@ -1102,7 +1102,7 @@
           </h2>
 
           <!-- Core Spec Cards Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
 
             <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
               <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-500 flex items-center justify-center mb-3">
@@ -1132,6 +1132,19 @@
             </div>
 
             <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-3">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h4 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Tegangan Baterai</h4>
+              <p class="text-xl font-display font-bold text-slate-900 dark:text-white mt-1">Maks. 12,6 V</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Tegangan maksimal baterai yang diperbolehkan
+                pada robot adalah <strong>12,6 Volt</strong>.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
               <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center mb-3">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1147,7 +1160,7 @@
           </div>
 
           <!-- Mandatory Specs List -->
-          <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3">10 Poin Regulasi
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3">11 Poin Regulasi
             Konstruksi Robot</h3>
           <div class="space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
 
@@ -1181,45 +1194,52 @@
                 wasit.</span>
             </div>
 
+            <div
+              class="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex items-start gap-2.5">
+              <span class="font-mono text-cyan-500 font-bold">05.</span>
+              <span><strong>Tegangan Baterai Maksimal:</strong> Tegangan maksimal baterai yang digunakan pada robot
+                adalah <strong>12,6 V</strong>.</span>
+            </div>
+
             <!-- Warning/Prohibition Items -->
             <div
               class="p-3 rounded-lg bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-200 flex items-start gap-2.5">
-              <span class="font-mono text-rose-500 font-bold">05.</span>
+              <span class="font-mono text-rose-500 font-bold">06.</span>
               <span><strong>Larangan Merusak:</strong> Robot tidak boleh memiliki perangkat yang merusak arena
                 pertandingan dan membalikkan robot lawan dengan cara melempar (no destructive flippers).</span>
             </div>
 
             <div
               class="p-3 rounded-lg bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-200 flex items-start gap-2.5">
-              <span class="font-mono text-rose-500 font-bold">06.</span>
+              <span class="font-mono text-rose-500 font-bold">07.</span>
               <span><strong>Larangan Pengganggu Sensor:</strong> Tidak diperbolehkan memiliki perangkat yang mengganggu
                 kinerja robot lawan seperti jammer sinyal, lampu strobe, laser berlebih, dan sejenisnya.</span>
             </div>
 
             <div
               class="p-3 rounded-lg bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-200 flex items-start gap-2.5">
-              <span class="font-mono text-rose-500 font-bold">07.</span>
+              <span class="font-mono text-rose-500 font-bold">08.</span>
               <span><strong>Larangan Sistem Lekat:</strong> Tidak memiliki sistem pelekat pada permukaan arena seperti
                 suction cup, diafragma, roda berperekat/lengket (sticky tires), atau zat perekat.</span>
             </div>
 
             <div
               class="p-3 rounded-lg bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-200 flex items-start gap-2.5">
-              <span class="font-mono text-rose-500 font-bold">08.</span>
+              <span class="font-mono text-rose-500 font-bold">09.</span>
               <span><strong>Larangan Senjata Berbahaya:</strong> Tidak boleh menggunakan proyektil, bilah gergaji aktif,
                 atau perangkat yang mudah terbakar.</span>
             </div>
 
             <div
               class="p-3 rounded-lg bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-200 flex items-start gap-2.5">
-              <span class="font-mono text-rose-500 font-bold">09.</span>
+              <span class="font-mono text-rose-500 font-bold">10.</span>
               <span><strong>Larangan Memecah Diri:</strong> Selama lomba berlangsung, robot dilarang memecah diri
                 menjadi beberapa bagian atau robot secara sengaja.</span>
             </div>
 
             <div
               class="p-3 rounded-lg bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-200 flex items-start gap-2.5">
-              <span class="font-mono text-rose-500 font-bold">10.</span>
+              <span class="font-mono text-rose-500 font-bold">11.</span>
               <span><strong>Larangan Downforce Buatan:</strong> Robot dilarang memiliki pompa vakum (vacuum fan) atau
                 magnet penambah downforce ke arena.</span>
             </div>
@@ -1239,13 +1259,13 @@
                 </span>
                 <h3 class="font-display font-bold text-base sm:text-lg">Simulasi Uji Kelayakan Robot (Self-Check)</h3>
               </div>
-              <span id="checklist-score" class="text-xs font-mono px-2 py-1 rounded bg-cyan-500/20 text-cyan-300">0 / 6
+              <span id="checklist-score" class="text-xs font-mono px-2 py-1 rounded bg-cyan-500/20 text-cyan-300">0 / 7
                 Lulus</span>
             </div>
 
             <p class="text-xs text-slate-400 mb-4">
               Centang setiap parameter di bawah ini untuk memastikan robot tim Anda siap lulus pada sesi pengecekan
-              panitia (uji dimensi, berat, suction, dan bagian tajam).
+              panitia (uji dimensi, berat, tegangan baterai, suction, dan bagian tajam).
             </p>
 
             <div class="space-y-2.5 text-xs sm:text-sm">
@@ -1261,6 +1281,13 @@
                 <input type="checkbox"
                   class="checklist-item rounded border-slate-700 text-cyan-500 focus:ring-cyan-500 w-4 h-4">
                 <span>Berat total robot beserta baterai tidak lebih dari 500 gram.</span>
+              </label>
+
+              <label
+                class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 cursor-pointer transition-colors">
+                <input type="checkbox"
+                  class="checklist-item rounded border-slate-700 text-cyan-500 focus:ring-cyan-500 w-4 h-4">
+                <span>Tegangan maksimal baterai robot tidak melebihi 12,6 V.</span>
               </label>
 
               <label
